@@ -49,4 +49,4 @@ colnames(total_merge) <- c("subject", "activity", features[extract_features, ]$V
 
 library(dplyr)
 secondTidyData <- total_merge %>% group_by(subject, activity) %>% summarise_each(funs(mean))
-write.table(secondTidyData, "tidy_data.txt", sep = ",")
+write.table(secondTidyData, "tidy_data.txt", sep = ",", row.name = FALSE)
