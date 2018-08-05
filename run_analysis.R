@@ -1,9 +1,12 @@
 #================================================================
 #1. Merges the training and the test sets to create one data set.
 #================================================================
+setwd("~")
+url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+download.file(url, "~/dataset.zip", mode = "wb")
+unzip("~/dataset.zip")
 
-setwd("C:/Users/Administrator/Documents/coursera/getting and cleaning data/UCI HAR Dataset")
-
+setwd("~/UCI HAR Dataset")
 subject_test <- read.table("./test/subject_test.txt")
 X_test <- read.table("./test/X_test.txt")
 y_test <- read.table("./test/y_test.txt")
@@ -16,13 +19,9 @@ test_merge <- cbind("subject"=subject_test, "activity"=y_test, X_test )
 train_merge <- cbind("subject"=subject_train, "activity"=y_train, X_train )
 total_merge <- rbind(test_merge, train_merge)
 
-#colnames(total_merge) <- c("category", "subject", features[, 2], "activity" )
-
 #==========================================================================================
 #2. Extracts only the measurements on the mean and standard deviation for each measurement.
 #==========================================================================================
-
-#extract_features <- grepl("category|subject|Y|mean|std", colnames(total_merge))
 
 features <- read.table("features.txt", as.is = TRUE)
 extract_features <- grep("mean|std", features[,2]) + 2
